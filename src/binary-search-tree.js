@@ -46,14 +46,32 @@ class BinarySearchTree {
     }
   }
 
-  has(/* data */) {
-    throw new NotImplementedError("Not implemented");
-    // remove line with error and write your code here
+  has(data) {
+    return this._searchNode(this._root, data) !== null;
   }
 
-  find(/* data */) {
-    throw new NotImplementedError("Not implemented");
-    // remove line with error and write your code here
+  find(data) {
+    return this._searchNode(this._root, data);
+  }
+
+  _searchNode(node, data) {
+    // base case (we have't found anything)
+    if (!node) {
+      return null;
+    }
+
+    // if data matches the current node => we've found the node
+    if (data === node.data) {
+      return node;
+    }
+    // if not and data is smaller than the root => move left to check smaller values
+    else if (data < node.data) {
+      return this._searchNode(node.left, data);
+    }
+    // if not and data isn't smaller than the root => move right to check greater values
+    else {
+      return this._searchNode(node.right, data);
+    }
   }
 
   remove(/* data */) {
