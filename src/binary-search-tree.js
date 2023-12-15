@@ -132,13 +132,21 @@ class BinarySearchTree {
   }
 
   min() {
-    throw new NotImplementedError("Not implemented");
-    // remove line with error and write your code here
+    // if empty
+    if (!this._root) {
+      return null;
+    }
+
+    return this._findMinValue(this._root);
   }
 
   max() {
-    throw new NotImplementedError("Not implemented");
-    // remove line with error and write your code here
+    // if empty
+    if (!this._root) {
+      return null;
+    }
+
+    return this._findMaxValue(this._root);
   }
 }
 
