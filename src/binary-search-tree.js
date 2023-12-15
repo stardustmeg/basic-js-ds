@@ -74,9 +74,61 @@ class BinarySearchTree {
     }
   }
 
-  remove(/* data */) {
-    throw new NotImplementedError("Not implemented");
-    // remove line with error and write your code here
+  remove(data) {
+    this._root = this._removeNode(this._root, data);
+  }
+
+  _removeNode(node, data) {
+    // base case => we haven't found the node
+    if (!node) {
+      return null;
+    }
+
+    if (data < node.data) {
+      // if not and data is smaller => move to the left
+      node.left = this._removeNode(node.left, data);
+    } // if not and data is bigger => move to the right
+    else if (data > node.data) {
+      node.right = this._removeNode(node.right, data);
+    } else {
+      // of one child
+      if (!node.left) {
+        // no left child => return right or null (if no right too)
+        return node.right;
+      } // no right child => return left
+      else if (!node.right) {
+        return node.left;
+      }
+
+      // if two children => compare
+      // find min in the right => successor
+
+      // replace current node with successor
+      node.data = this._findMinValue(node.right);
+
+      // recursion once again to remove successor
+      node.right = this._removeNode(node.right, node.data);
+    }
+
+    return node;
+  }
+
+  _findMinValue(node) {
+    let current = node;
+    // move to the most left leaf (the smallest value)
+    while (current.left) {
+      current = current.left;
+    }
+    return current.data;
+  }
+
+  _findMaxValue(node) {
+    let current = node;
+    // move to the most right leaf (the greatest value)
+    while (current.right) {
+      current = current.right;
+    }
+    return current.data;
   }
 
   min() {
