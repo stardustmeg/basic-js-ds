@@ -24,12 +24,17 @@ const { ListNode } = require("../extensions/list-node.js");
  */
 
 function removeKFromList(l, k) {
+  // if the list is empty
+  if (!l) {
+    return null;
+  }
+
   // if it starts with k
   while (l && l.value === k) {
     l = l.next;
   }
 
-  // start checking the list
+  // start checking the rest of the list
   let current = l;
 
   while (current && current.next !== null) {
